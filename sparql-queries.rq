@@ -1,0 +1,38 @@
+Form the following SPARQL queries for the ontology you formed:
+i. The first returns the phones of all professors.
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX uni: <http://www.mydomain.com/uni-ns/>
+select ?phone
+WHERE
+{?x rdf:type uni:Professor.
+ ?x	uni:has_phone ?phone
+}
+
+ii. The second returns the phones of all students over the age of 23 (using FILTER)
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX uni: <http://www.mydomain.com/uni-ns/>
+select ?phone
+WHERE
+{?x rdf:type uni:Student.
+	?x uni:has_phone ?phone.
+	?x uni:has_age ?age.
+	FILTER (?age > "23")
+}
+
+
+iii. The third returns the names of all Individuals [must belong to the Persons class] who are
+members of a department located in Mohammedia.
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX uni: <http://www.mydomain.com/uni-ns/>
+
+SELECT ?name
+WHERE {	?x	uni:member_of ?dep.
+        ?x 	uni:has_name ?name.
+		?dep	uni:dep_city "Mohammedia".
+}
